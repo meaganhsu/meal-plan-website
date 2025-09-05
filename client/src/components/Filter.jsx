@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import "../styles/Filter.css";
-import {FAMILY_MEMBERS} from "../../../routes/family.js";
 
 const Filter = ({ dishes, onFilteredDishesChange }) => {
     // filter states
@@ -11,7 +10,7 @@ const Filter = ({ dishes, onFilteredDishesChange }) => {
     // predefined arrays
     const cuisines = ["Japanese", "Asian", "Chinese", "Western"];
     const ingredients = ["Red Meat", "Pork", "Chicken", "Seafood", "Eggs", "Bread", "Noodles", "Pasta", "Rice", "Soup", "Vegetables"];
-    const preferences = FAMILY_MEMBERS.map(m => m.toLowerCase());
+    const preferences = ["Hubert", "Cherry", "Haley", "Ryan", "Meagan"].map(m => m.toLowerCase());
 
     // toggle functions
     const toggleIngredient = (ingredient) => {

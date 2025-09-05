@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Multiselect from 'multiselect-react-dropdown';
-import {FAMILY_MEMBERS} from "../../../routes/family.js";
+const API_URL = import.meta.env.VITE_API_URL;
 
 export default function Dish() {
     const [form, setForm] = useState({
@@ -45,7 +45,7 @@ export default function Dish() {
             try {
                 // fetching data from api
                 const response = await fetch(
-                    `http://localhost:5050/record/${params.id.toString()}`
+                    `${API_URL}/record/${params.id.toString()}`
                 );
 
                 if (!response.ok) {       // http error
@@ -108,7 +108,7 @@ export default function Dish() {
             let response;
             if (isNew) {
                 // add new dish operation
-                response = await fetch("http://localhost:5050/record", {
+                response = await fetch(`${API_URL}/record`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -117,7 +117,7 @@ export default function Dish() {
                 });
             } else {
                 // update dish operation
-                response = await fetch(`http://localhost:5050/record/${params.id}`, {
+                response = await fetch(`${API_URL}/record/${params.id}`, {
                     method: "PATCH",
                     headers: {
                         "Content-Type": "application/json",
@@ -214,7 +214,7 @@ export default function Dish() {
                         <div className="container">
                             <label htmlFor="preferences">Preferences</label>
                             <div className="row" style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-                                {FAMILY_MEMBERS.map((member) => {
+                                {["Hubert", "Cherry", "Haley", "Ryan", "Meagan"].map((member) => {
                                     const memberKey = member.toLowerCase();
                                     const isChecked = Array.isArray(form.preferences) && form.preferences.includes(memberKey);
 

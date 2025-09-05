@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { format, addDays, startOfWeek, endOfWeek, eachDayOfInterval, isToday, isAfter, isBefore, subWeeks, addWeeks, startOfDay } from "date-fns";
 import DishSelection from "../components/DishSelection";
 import "../styles/Calendar.css";
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5050';
 
 const Calendar = () => {
     const [currentDate, setCurrentDate] = useState(new Date());
@@ -52,7 +53,7 @@ const Calendar = () => {
     useEffect(() => {
         async function fetchDishes() {
             try {
-                const response = await fetch("http://localhost:5050/record/");
+                const response = await fetch(`${API_URL}/record/${params.id.toString()}`);
                 if (!response.ok) throw new Error("Failed to fetch dishes");
                 setDishes(await response.json());
             } catch (e) {
@@ -80,7 +81,7 @@ const Calendar = () => {
     // fetch meal plan for a specific week
     const fetchMealPlanForWeek = async (weekStartDate) => {
         try {
-            const response = await fetch(`http://localhost:5050/api/calendar/${weekStartDate}`);
+            const response = await fetch(`${API_URL}/api/calendar/${weekStartDate}`);
             if (!response.ok && response.status !== 404) {
                 throw new Error("Failed to fetch meal plan");
             }
@@ -112,7 +113,7 @@ const Calendar = () => {
     // save meal plan to archive
     const saveMealPlan = async (updatedMealPlan) => {
         try {
-            const response = await fetch("http://localhost:5050/api/calendar", {
+            const response = await fetch(`${API_URL}/api/calendar`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -295,7 +296,7 @@ const Calendar = () => {
         // only updating today or past days
         if (mealDate <= today) {
             try {
-                const response = await fetch(`http://localhost:5050/record/${dishId}/last-eaten`, {
+                const response = await fetch(`${API_URL}/record/${dishId}/last-eaten`, {
                     method: "PATCH",
                     headers: {
                         "Content-Type": "application/json",

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import Multiselect from "multiselect-react-dropdown";
 import "../styles/EditDish.css";
-import {FAMILY_MEMBERS} from "../../../routes/family.js";
+const API_URL = import.meta.env.VITE_API_URL;
 
 export default function EditDish({ isOpen, onClose, dish, onSaved, mode = "edit" }) {
     const isNew = mode === "create";
@@ -104,14 +104,14 @@ export default function EditDish({ isOpen, onClose, dish, onSaved, mode = "edit"
 
             if (isNew) {
                 // create dish operation
-                res = await fetch("http://localhost:5050/record", {      // creating new dish
+                res = await fetch(`${API_URL}/record`, {      // creating new dish
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(dishData),
                 });
             } else {
                 // update dish operation
-                res = await fetch(`http://localhost:5050/record/${dish._id}`, {    // update existing dish
+                res = await fetch(`${API_URL}/record/${dish._id}`, {    // update existing dish
                     method: "PATCH",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(dishData),
@@ -185,7 +185,7 @@ export default function EditDish({ isOpen, onClose, dish, onSaved, mode = "edit"
                         <div className="field">
                             <label>Preferences</label>
                             <div className="prefs-row">
-                                {FAMILY_MEMBERS.map((member) => {
+                                {["Hubert", "Cherry", "Haley", "Ryan", "Meagan"].map((member) => {
                                     const memberKey = member.toLowerCase();
                                     const isChecked = Array.isArray(form.preferences) && form.preferences.includes(memberKey);
                                     return (

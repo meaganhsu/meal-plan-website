@@ -7,11 +7,12 @@ import calendar from './routes/calendar.js';
 // loading environment variables
 dotenv.config();
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 5050;
 const app = express();
 
 const allowedOrigins = [
     'http://localhost:3000',
+    'http://localhost:5173',
     process.env.FRONTEND_URL
 ].filter(Boolean);
 

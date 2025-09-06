@@ -16,7 +16,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "node_modules/.bin/vite serve ./src",
-    "start": "node index.js"
+    "start": "node index.js",
+    "install-deps": "npm install --omit=dev"
   },
   "keywords": [],
   "author": "",

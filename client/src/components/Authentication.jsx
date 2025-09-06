@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 import '../styles/Authentication.css';
 
-const PASSWORD = import.meta.env.VITE_APP_PASSWORD;
-
 export default function Authentication() {
+    const PASSWORD = import.meta.env.VITE_APP_PASSWORD;
+
     const [input, setInput] = useState('');
     const [authenticated, setAuthenticated] = useState(false);
     const [error, setError] = useState('');

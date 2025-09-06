@@ -7,7 +7,7 @@ import calendar from './routes/calendar.js';
 // loading environment variables
 dotenv.config();
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8080;
 const app = express();
 
 const allowedOrigins = [
@@ -34,8 +34,8 @@ app.use("/record", records);
 app.use('/api/calendar', calendar);
 
 // health check
-app.get('/', (req, res) => {
-    res.json({ message: 'Server is running' });
+app.get('/health', (req, res) => {
+    res.status(200).json({ status: 'OK', timestamp: new Date().toISOString() });
 });
 
 app.listen(PORT, '0.0.0.0', () => {

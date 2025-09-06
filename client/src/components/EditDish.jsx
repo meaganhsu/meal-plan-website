@@ -103,14 +103,14 @@ export default function EditDish({ isOpen, onClose, dish, onSaved, mode = "edit"
 
             if (isNew) {
                 // create dish operation
-                res = await fetch(`/record`, {      // creating new dish
+                res = await fetch(`http://localhost:5050/record`, {      // creating new dish
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(dishData),
                 });
             } else {
                 // update dish operation
-                res = await fetch(`/record/${dish._id}`, {    // update existing dish
+                res = await fetch(`http://localhost:5050/record/${dish._id}`, {    // update existing dish
                     method: "PATCH",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(dishData),

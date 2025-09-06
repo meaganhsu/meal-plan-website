@@ -10,14 +10,12 @@ dotenv.config();
 const PORT = process.env.PORT || 5050;
 const app = express();
 
-const allowedOrigins = process.env.NODE_ENV === 'production'
-    ? ''
-    : 'http://localhost:5173';
-
 app.use(cors({
     methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
     credentials: true,
-    origin: allowedOrigins
+    origin: process.env.NODE_ENV === 'production'
+        ? ['https://meal-plan-website-production.up.railway.app/']
+        : ['http://localhost:5173', 'http://localhost:5050'],
 }));
 
 app.use(express.json());

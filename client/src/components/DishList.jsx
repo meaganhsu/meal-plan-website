@@ -117,8 +117,8 @@ export default function DishList() {
             setIsLoading(true);
             try {
                 const url = searchTerm
-                    ? `/record/search?name=${encodeURIComponent(searchTerm)}`
-                    : `/record/`;
+                    ? `http://localhost:5050/record/search?name=${encodeURIComponent(searchTerm)}`
+                    : `http://localhost:5050/record/`;
 
                 const response = await fetch(url);
                 if (!response.ok) {
@@ -191,7 +191,7 @@ export default function DishList() {
 
     async function deleteDish(id) {
         try {
-            const response = await fetch(`/record/${id}`, {
+            const response = await fetch(`http://localhost:5050/record/${id}`, {
                 method: "DELETE",
             });
 

@@ -33,6 +33,11 @@ app.use(express.json());
 app.use("/record", records);
 app.use('/api/calendar', calendar);
 
-app.listen(PORT, () => {
+// health check
+app.get('/', (req, res) => {
+    res.json({ message: 'Server is running' });
+});
+
+app.listen(PORT, '0.0.0.0', () => {
     console.log(`Server running on port ${PORT}`);
 });

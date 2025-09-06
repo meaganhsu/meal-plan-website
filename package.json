@@ -6,7 +6,7 @@
     "date-fns": "^4.1.0",
     "dotenv": "^17.2.2",
     "express": "^5.1.0",
-    "mongodb": "^6.19.0",
+    "mongodb": "^6.17.0",
     "mongoose": "^8.16.1",
     "multiselect-react-dropdown": "^2.0.25"
   },
@@ -15,17 +15,11 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "server": "node server.js",
-    "client": "cd client && npm run dev",
-    "start": "node server.js",
-    "install-client": "cd client && npm install"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node_modules/.bin/vite serve ./src"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
-  "devDependencies": {
-    "concurrently": "^9.2.1"
-  }
+  "description": ""
 }

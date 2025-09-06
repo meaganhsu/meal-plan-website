@@ -1,17 +1,30 @@
-import 'dotenv/config';
 import express from "express";
 import cors from "cors";
+import dotenv from "dotenv";
 import records from "./routes/dish.js";
 import calendar from './routes/calendar.js';
 
-const PORT = process.env.PORT || 5173;
+// loading environment variables
+dotenv.config();
+
+const PORT = process.env.PORT || 5050;
 const app = express();
 
-// Update CORS for production
+// for development, allow both localhost and production URL
+const allowedOrigins = [
+    'http://localhost:5173', process.env.FRONTEND_URL
+].filter(Boolean);
+
 app.use(cors({
-    origin: process.env.NODE_ENV === 'production'
-        ? 'https://meaganhsu.github.io/meal-planning-website/'
-        : 'http://localhost:5173',
+    origin: function (origin, callback) {
+        if (!origin) return callback(null, true);
+
+        if (allowedOrigins.indexOf(origin) !== -1) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
     methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
     credentials: true
 }));
@@ -22,4 +35,5 @@ app.use('/api/calendar', calendar);
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
+    console.log('API URL:', import.meta.env.VITE_API_URL);
 });

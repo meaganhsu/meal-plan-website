@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Multiselect from 'multiselect-react-dropdown';
-const API_URL = import.meta.env.VITE_API_URL;
-
+e
 export default function Dish() {
     const [form, setForm] = useState({
         name: "",
@@ -45,7 +44,7 @@ export default function Dish() {
             try {
                 // fetching data from api
                 const response = await fetch(
-                    `${API_URL}/record/${params.id.toString()}`
+                    `${import.meta.env.VITE_API_URL}/record/${params.id.toString()}`
                 );
 
                 if (!response.ok) {       // http error
@@ -108,7 +107,7 @@ export default function Dish() {
             let response;
             if (isNew) {
                 // add new dish operation
-                response = await fetch(`${API_URL}/record`, {
+                response = await fetch(`${import.meta.env.VITE_API_URL}/record`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -117,7 +116,7 @@ export default function Dish() {
                 });
             } else {
                 // update dish operation
-                response = await fetch(`${API_URL}/record/${params.id}`, {
+                response = await fetch(`${import.meta.env.VITE_API_URL}/record/${params.id}`, {
                     method: "PATCH",
                     headers: {
                         "Content-Type": "application/json",

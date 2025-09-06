@@ -3,7 +3,6 @@ import Filter from "./Filter.jsx";
 import EditDish from "./EditDish.jsx";
 import Pagination from "./Pagination";
 import "../styles/DishList.css";
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5050';
 
 // rendering a single dish row within the table list
 const Dish = (props) => {
@@ -118,21 +117,16 @@ export default function DishList() {
             setIsLoading(true);
             try {
                 const url = searchTerm
-                    ? `${API_URL}/record/search?name=${encodeURIComponent(searchTerm)}`
-                    : `${API_URL}/record`;
-
-                console.log('Fetching from URL:', url);
+                    ? `${import.meta.env.VITE_API_URL}/record/search?name=${encodeURIComponent(searchTerm)}`
+                    : `${import.meta.env.VITE_API_URL}/record/`;
 
                 const response = await fetch(url);
-
-                console.log('Response status:', response.status);
                 if (!response.ok) {
                     const message = `An error occurred: ${response.statusText}`;
                     console.error(message);
                     return;
                 }
                 const data = await response.json();
-                console.log('Received data:', data);
                 setDishes(data);
             } catch (error) {
                 console.error("Fetch error:", error);
@@ -197,7 +191,7 @@ export default function DishList() {
 
     async function deleteDish(id) {
         try {
-            const response = await fetch(`${API_URL}/record/${id}`, {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/record/${id}`, {
                 method: "DELETE",
             });
 

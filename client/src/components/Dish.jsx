@@ -44,7 +44,7 @@ export default function Dish() {
             try {
                 // fetching data from api
                 const response = await fetch(
-                    `${import.meta.env.VITE_API_URL}/record/${params.id.toString()}`
+                    `/record/${params.id.toString()}`
                 );
 
                 if (!response.ok) {       // http error
@@ -107,7 +107,7 @@ export default function Dish() {
             let response;
             if (isNew) {
                 // add new dish operation
-                response = await fetch(`${import.meta.env.VITE_API_URL}/record`, {
+                response = await fetch(`/record`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -116,7 +116,7 @@ export default function Dish() {
                 });
             } else {
                 // update dish operation
-                response = await fetch(`${import.meta.env.VITE_API_URL}/record/${params.id}`, {
+                response = await fetch(`/record/${params.id}`, {
                     method: "PATCH",
                     headers: {
                         "Content-Type": "application/json",

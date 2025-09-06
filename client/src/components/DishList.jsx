@@ -117,8 +117,8 @@ export default function DishList() {
             setIsLoading(true);
             try {
                 const url = searchTerm
-                    ? `${import.meta.env.VITE_API_URL}/record/search?name=${encodeURIComponent(searchTerm)}`
-                    : `${import.meta.env.VITE_API_URL}/record/`;
+                    ? `/record/search?name=${encodeURIComponent(searchTerm)}`
+                    : `/record/`;
 
                 const response = await fetch(url);
                 if (!response.ok) {
@@ -191,7 +191,7 @@ export default function DishList() {
 
     async function deleteDish(id) {
         try {
-            const response = await fetch(`${import.meta.env.VITE_API_URL}/record/${id}`, {
+            const response = await fetch(`/record/${id}`, {
                 method: "DELETE",
             });
 
